@@ -12,28 +12,114 @@
 	</head>
 <!-- ////////////////////////////// -->
 	<body>
-  		<input type="text" maxlength="2" name="value" id='value' value='16'/>
-		<input type="button" value="submit" id="sub"/>
-		<button class="randomize">???</button>
-		<button id="play">Play</button>
-		<button id="stop">Stop</button>
-		<button id="pause">Pause</button>
-		<button id="reset">Reset</button>
-		<div class="container"></div>
-		<div id="tableContainer"></div>
+		<header>
+			<div class="logo">
+				<p>place</p>
+				<p>holder</p>
+			</div>
+			<h1>China Town Beats</h1>
+			<nav>
+				<a href="#">  About  </a>
+				<a href="#">  Sounds  </a>
+				<a href="#">  Stories  </a>
+			</nav>
+		</header>
+		<section>
+			<h2>Sequencer</h2>
+	  		<input type="text" maxlength="2" name="value" id='value' value='16'/>
+			<input type="button" value="submit" id="sub"/>
+			<button class="randomize">???</button>
+			<button id="play">Play</button>
+			<button id="stop">Stop</button>
+			<button id="pause">Pause</button>
+			<button id="reset">Reset</button>
+			<div class="step_opt">
+				<table class='sqopt'>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+					<tr><td>
+						<select>
+						  <option value="opt1">Opt1</option>
+						  <option value="opt2">Opt2</option>
+						  <option value="opt3">Opt3</option>
+						  <option value="opt4">Opt4</option>
+						</select>
+					</td></tr>
+				</table>
+			</div>
+			
+			<div class="container">	
+				<div id="tableContainer"></div>
+			</div>
 
-		
-		<div class="range-slider">
-			<p>Loop Length</p>
-		  <input class="range-slider__range" type="range" value="100" min="0" max="500">
-		  <span class="range-slider__value">0</span>
-		</div>
+			<div class="toolbox">
+				<div class="range-slider">
+					<p>Loop Length</p>
+				  <input class="range-slider__range" type="range" value="100" min="0" max="500">
+				  <span class="range-slider__value">0</span>
+				</div>
 
-		<div class="range-slider">
-			<p>Tempo</p>
-		  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
-		  <span class="range-slider__value">0</span>
-		</div>
+				<div class="range-slider">
+					<p>Tempo</p>
+				  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
+				  <span class="range-slider__value">0</span>
+				</div>
+			</div>
+		</section>
 		<script src="scripts/Tone.js"></script>
 		<script src="scripts/sound.js"></script>
 		
