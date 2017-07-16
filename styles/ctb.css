@@ -1,5 +1,7 @@
 /*******************Header**********************/
-
+*{
+  font-family: helvetica;
+}
 header{
   display: inline-block;
   height: 20%;
@@ -56,28 +58,42 @@ nav a{
 .tableContainer{
   max-width: 75%;
 }
+.step_opt{
+  margin-top: 0.5em;
+  margin-left: -20px;
+  text-align: left;
+  float: left;
+  display: inline-block;
+  max-width: 20%;
+  width: auto;
+  line-height: 2.5;
+}
+
+}
 .sqopt{
   margin: 0 auto;
-  display: inline-block;
   border:none;
   float: left;
   width: auto;
   max-width: 25%;
-  height: 25px;
-}
-
-.sqopt td{
-  font-size: 0.8em;
-  height:25px;
+   font-size: 0.8em;
+  height:35px;
   border:none;
+
 }
 
+ul{
+  list-style-type: none;
+}
+.sqopt li{
+  word-spacing: 0.75;
+}
 
 td {
     border: 1px solid;
-    width: 25px;
-    min-width: 20px;
-    height: 25px;
+    width: 35px;
+    min-width: 30px;
+    height: 35px;
 }
 .clicked{
   background-color: #000080;
@@ -104,7 +120,6 @@ table{
   margin:; 0 auto;
   font-size: 0.8em;
 }
-
 
 
 // Base Colors

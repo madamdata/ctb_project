@@ -67,6 +67,7 @@ $(document).ready(function(){
 	$('.randomize').click(function(){
 		randomizeAll();
 	});
+
 	var rangeSlider = function(){
 	  var slider = $('.range-slider'),
 	      range = $('.range-slider__range'),
@@ -87,5 +88,12 @@ $(document).ready(function(){
 
 	rangeSlider();
 
+
+	$("div.step_settings").hide();
+    $("input[name$='stepselect']").click(function() {
+        var test = $(this).val();
+        $("div.step_settings").hide();
+        $("#" + test).show();
+    });
 
 });
