@@ -64,7 +64,12 @@ function tog(row,column,state) {
 function randomizeAll() {
 	for (i=0;i<8;i++) {
 		for (j=0;j<16;j++) {
-			sequences[i][j]=Math.round(Math.random());
+			stepvalue = Math.round(Math.random());
+			$("td").removeClass('clicked');
+			sequences[i][j]=stepvalue
+			if (stepvalue==1) {
+				$("[col="+i+"][row="+j+"]").addClass('clicked')
+			}
 		}
 	}
 };
