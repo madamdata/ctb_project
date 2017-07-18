@@ -9,6 +9,7 @@ var params = {
 };
 var synths = [0,0,0,0,0,0,0,0];
 var step = 0;
+var bpm = 180;
 var loop;
 var samplebank = [
 	"./samples/ctbseqchords.wav",
@@ -76,10 +77,26 @@ function randomizeAll() {
 	}
 };
 
-function startSequence() {
-	console.log("starting!");
-	Tone.Transport.start();
+function clearBlink() {
+	$("td").removeClass('highlight');
 }
+
+function startSequence() {
+	Tone.Transport.start();
+	loop.start();
+	Tone.Transport.bpm.value = bpm;
+}
+
+function stopSequence() {
+	Tone.Transport.stop();
+	clearBlink();
+	step = 0;
+}
+
+function changeTempo(tempo) {
+	Tone.Transport.bpm.value = tempo
+}
+
 
 //synth.triggerAttackRelease("C5", +0.5);
 
@@ -96,7 +113,7 @@ loop = new Tone.Loop(function(time){
 			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
 			var note = 0
 			if (sequences[i][step] == 1) {
-				synths[i].triggerAttackRelease(note,0.1)
+				synths[i].triggerAttackRelease(note,0.1,time)
 			};
 		};
 		prevstep = step;
@@ -105,7 +122,8 @@ loop = new Tone.Loop(function(time){
 		$("[col="+prevstep+"]").removeClass('highlight')
 		//console.log(step)
 
-	}, "8n").start(0);
+	}, "16n");
+loop.humanize=false;
 
 //Tone.Transport.start();
 //Tone.Transport.bpm.value = 180;

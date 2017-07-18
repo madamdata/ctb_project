@@ -70,6 +70,7 @@ $(document).ready(function(){
 	});
 
 	$("[id='play']").click(function(){startSequence();});
+	$("[id='stop']").click(function(){stopSequence();});
 
 	var rangeSlider = function(){
 		var slider = $('.range-slider'),
@@ -85,11 +86,17 @@ $(document).ready(function(){
 
 			range.on('input', function(){
 				$(this).next(value).html(this.value);
+				//value = $(this).attr('value');
+				//console.log(value);
 			});
 		});
 	};
 
 	rangeSlider();
+	var tempoSlider = $("input[id$='temposlider']");
+	console.log(tempoSlider);
+	temposlider.click(function(){console.log("hiclick")});
+	tempoSlider.change(function() { changeTempo(this.value);console.log("hi")});
 
 
 	$("div.step_settings").hide();
