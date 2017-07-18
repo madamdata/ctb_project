@@ -87,8 +87,8 @@ loop = new Tone.Loop(function(time){
 				synths[i].triggerAttackRelease(note,0.1)
 			};
 		};
+		prevstep = step;
 		step = (step + 1) % numSteps;
-		prevstep = (step-1) % numSteps;
 		$("[col="+step+"]").toggleClass('highlight')
 		$("[col="+prevstep+"]").toggleClass('highlight')
 		//console.log(step)
