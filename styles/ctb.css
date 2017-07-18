@@ -289,6 +289,7 @@ padding: 15px;
   margin-left: 20px;
 }
 
+
 /**********STORIES PAGE********/
 
 .stories{
@@ -304,7 +305,7 @@ padding: 15px;
   line-height: 2.5;
 }
 
-p::first-letter {
+.stories p::first-letter {
   float: left;
   font-size: 5em;
   margin: 0 .2em 0 0;
