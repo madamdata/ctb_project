@@ -77,7 +77,8 @@ function randomizeAll() {
 };
 
 function startSequence() {
-	Tone.Transport.start()
+	console.log("starting!");
+	Tone.Transport.start();
 }
 
 //synth.triggerAttackRelease("C5", +0.5);
