@@ -63,13 +63,15 @@ function tog(row,column,state) {
 };
 
 function randomizeAll() {
+	$("td").removeClass('clicked');
 	for (i=0;i<8;i++) {
 		for (j=0;j<16;j++) {
-			stepvalue = Math.round(Math.random());
-			$("td").removeClass('clicked');
+			stepvalue = Math.round(Math.random()-0.3);
 			sequences[i][j]=stepvalue
 			if (stepvalue==1) {
-				$("[row="+i+"][col="+j+"]").toggleClass('clicked');
+				thisstep = $("[row="+i+"][col="+j+"]");
+				thisstep.addClass('clicked');
+				//console.log(thisstep);
 				//$("[col="+j+"]").addClass('clicked');
 				//console.log(i,j);
 			}

@@ -95,8 +95,7 @@ $(document).ready(function(){
 	rangeSlider();
 	var tempoSlider = $("input[id$='temposlider']");
 	console.log(tempoSlider);
-	temposlider.click(function(){console.log("hiclick")});
-	tempoSlider.change(function() { changeTempo(this.value);console.log("hi")});
+	tempoSlider.change(function() { changeTempo(this.value)});
 
 
 	$("div.step_settings").hide();
