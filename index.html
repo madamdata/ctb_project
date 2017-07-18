@@ -6,11 +6,13 @@
 		<link rel="stylesheet" href="jquery-modal-master/jquery.modal.css" type="text/css" media="screen" />
 		
 		<script
-			  src="http://code.jquery.com/jquery-1.12.4.min.js"
+			  src="https://code.jquery.com/jquery-1.12.4.min.js"
 			  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
 			  crossorigin="anonymous"></script>	
 		<script src="scripts/ctb.js"></script>
 				<script src="jquery-modal-master/	jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scripts/Tone.js"></script>
+		<script src="scripts/sound.js"></script>
 
 	</head>
 <!-- ////////////////////////////// -->
@@ -137,7 +139,7 @@
 	<li>
 				<div class="range-slider">
 					<p>Loop Length</p>
-				  <input class="range-slider__range" type="range" value="100" min="0" max="500">
+				  <input class="range-slider__range" type="range" value="1" min="0" max="64">
 				  <span class="range-slider__value">0</span>
 				</div>
 	</li>
@@ -161,7 +163,7 @@
 
 				<div class="range-slider">
 					<p>Tempo</p>
-				  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
+				<input class="range-slider__range" type="range" value="180" min="40" max="500" step="1" id="temposlider"> 
 				  <span class="range-slider__value">0</span>
 				</div>
 	</li>
@@ -204,8 +206,6 @@
 			</div>
 		</section>
 
-		<script src="scripts/Tone.js"></script>
-		<script src="scripts/sound.js"></script>
 		
 	</body>
 </html>

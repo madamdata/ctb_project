@@ -1,4 +1,3 @@
-//var MonoSynth = require("Tone").MonoSynth;
 var audioCtx = new (window.AudioContext || window.webkitAudioContext);
 var numSamples = 8;
 var numSteps = 16;
@@ -10,13 +9,36 @@ var params = {
 };
 var synths = [0,0,0,0,0,0,0,0];
 var step = 0;
+var bpm = 180;
 var loop;
+var samplebank = [
+	"./samples/ctbseqchords.wav",
+	"./samples/min_kick_13_E.wav",
+	"./samples/mkbsnare2.wav",
+	"./samples/TL-60Hat_C04.wav",
+	"./samples/TL-60Hat_O04.wav",
+	"./samples/crackle1-0.wav",
+	"./samples/cracklePew1-1.wav",
+	"./samples/TL-60Snare61.wav"
+];
+
+//for (i = 0; i<8; i++) {
+	//synths[i] = new Tone.MonoSynth(params);
+	//synths[i].toMaster();
+	//synths[i].volume.value = -10
+//};
  
 for (i = 0; i<8; i++) {
-	synths[i] = new Tone.MonoSynth(params);
+	synths[i] = new Tone.Sampler(samplebank[i]);
 	synths[i].toMaster();
 	synths[i].volume.value = -10
 };
+
+// store sample locations 
+//for (i = 0; i<8; i++) {
+	//samplebank[i] = 
+//};
+
 
 // DEFINE FUNCTIONS
 
@@ -41,12 +63,42 @@ function tog(row,column,state) {
 };
 
 function randomizeAll() {
+	$("td").removeClass('clicked');
 	for (i=0;i<8;i++) {
 		for (j=0;j<16;j++) {
-			sequences[i][j]=Math.round(Math.random());
+			stepvalue = Math.round(Math.random()-0.3);
+			sequences[i][j]=stepvalue
+			if (stepvalue==1) {
+				thisstep = $("[row="+i+"][col="+j+"]");
+				thisstep.addClass('clicked');
+				//console.log(thisstep);
+				//$("[col="+j+"]").addClass('clicked');
+				//console.log(i,j);
+			}
 		}
 	}
 };
+
+function clearBlink() {
+	$("td").removeClass('highlight');
+}
+
+function startSequence() {
+	Tone.Transport.start();
+	loop.start();
+	Tone.Transport.bpm.value = bpm;
+}
+
+function stopSequence() {
+	Tone.Transport.stop();
+	clearBlink();
+	step = 0;
+}
+
+function changeTempo(tempo) {
+	Tone.Transport.bpm.value = tempo
+}
+
 
 //synth.triggerAttackRelease("C5", +0.5);
 
@@ -60,14 +112,20 @@ var chord = [0, 3, 5, 7, 10, 14, 12, 2];
 
 loop = new Tone.Loop(function(time){
 		for (i = 0; i < 8; i++) {
-			var note = Tone.Frequency(chord[i]+60, "midi").toNote();
+			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
+			var note = 0
 			if (sequences[i][step] == 1) {
-				synths[i].triggerAttackRelease(note,0.1)
+				synths[i].triggerAttackRelease(note,0.1,time)
 			};
 		};
+		prevstep = step;
 		step = (step + 1) % numSteps;
+		$("[col="+step+"]").addClass('highlight')
+		$("[col="+prevstep+"]").removeClass('highlight')
+		//console.log(step)
 
-	}, "8n").start(0);
+	}, "16n");
+loop.humanize=false;
 
-Tone.Transport.start();
-Tone.Transport.bpm.value = 180;
+//Tone.Transport.start();
+//Tone.Transport.bpm.value = 180;
