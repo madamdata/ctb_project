@@ -24,7 +24,7 @@ $(document).ready(function(){
 		var state = 0; 
 		$( this ).toggleClass('clicked');					//this adds the class 'clicked' to a cell, it's a toggle and can turn off again with a single click
 		if ($(this).hasClass('clicked')) {state = 1}
-			else {state = 0};
+		else {state = 0};
 		//console.log(row,col,state);
 		tog(row,col,state);
 
@@ -59,6 +59,7 @@ $(document).ready(function(){
 			if ($(this).hasClass('clicked')) {state = 1}
 			else {state = 0};
 			//console.log(row,col,state);
+			//trigger the function "tog" defined in sound.js
 			tog(row,col,state);
 
 		});
@@ -69,31 +70,31 @@ $(document).ready(function(){
 	});
 
 	var rangeSlider = function(){
-	  var slider = $('.range-slider'),
-	      range = $('.range-slider__range'),
-	      value = $('.range-slider__value');
-	    
-	  slider.each(function(){
+		var slider = $('.range-slider'),
+			range = $('.range-slider__range'),
+			value = $('.range-slider__value');
 
-	    value.each(function(){
-	      var value = $(this).prev().attr('value');
-	      $(this).html(value);
-	    });
+		slider.each(function(){
 
-	    range.on('input', function(){
-	      $(this).next(value).html(this.value);
-	    });
-	  });
+			value.each(function(){
+				var value = $(this).prev().attr('value');
+				$(this).html(value);
+			});
+
+			range.on('input', function(){
+				$(this).next(value).html(this.value);
+			});
+		});
 	};
 
 	rangeSlider();
 
 
 	$("div.step_settings").hide();
-    $("input[name$='stepselect']").click(function() {
-        var test = $(this).val();
-        $("div.step_settings").hide();
-        $("#" + test).show();
-    });
+	$("input[name$='stepselect']").click(function() {
+		var test = $(this).val();
+		$("div.step_settings").hide();
+		$("#" + test).show();
+	});
 
 });
