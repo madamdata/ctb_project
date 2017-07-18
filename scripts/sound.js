@@ -68,7 +68,7 @@ function randomizeAll() {
 			$("td").removeClass('clicked');
 			sequences[i][j]=stepvalue
 			if (stepvalue==1) {
-				$("[col="+i+"][row="+j+"]").addClass('clicked')
+				$("[col="+i+"]").addClass('clicked')
 			}
 		}
 	}
