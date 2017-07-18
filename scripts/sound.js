@@ -1,4 +1,3 @@
-//var MonoSynth = require("Tone").MonoSynth;
 var audioCtx = new (window.AudioContext || window.webkitAudioContext);
 var numSamples = 8;
 var numSteps = 16;
@@ -11,12 +10,34 @@ var params = {
 var synths = [0,0,0,0,0,0,0,0];
 var step = 0;
 var loop;
+var samplebank = [
+	"./samples/ctbseqchords.wav",
+	"./samples/min_kick_13_E.wav",
+	"./samples/mkbsnare2.wav",
+	"./samples/TL-60Hat_C04.wav",
+	"./samples/TL-60Hat_O04.wav",
+	"./samples/crackle1-0.wav",
+	"./samples/cracklePew1-1.wav",
+	"./samples/TL-60Snare61.wav"
+];
+
+//for (i = 0; i<8; i++) {
+	//synths[i] = new Tone.MonoSynth(params);
+	//synths[i].toMaster();
+	//synths[i].volume.value = -10
+//};
  
 for (i = 0; i<8; i++) {
-	synths[i] = new Tone.MonoSynth(params);
+	synths[i] = new Tone.Sampler(samplebank[i]);
 	synths[i].toMaster();
 	synths[i].volume.value = -10
 };
+
+// store sample locations 
+//for (i = 0; i<8; i++) {
+	//samplebank[i] = 
+//};
+
 
 // DEFINE FUNCTIONS
 
@@ -60,7 +81,8 @@ var chord = [0, 3, 5, 7, 10, 14, 12, 2];
 
 loop = new Tone.Loop(function(time){
 		for (i = 0; i < 8; i++) {
-			var note = Tone.Frequency(chord[i]+60, "midi").toNote();
+			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
+			var note = 0
 			if (sequences[i][step] == 1) {
 				synths[i].triggerAttackRelease(note,0.1)
 			};
@@ -69,5 +91,5 @@ loop = new Tone.Loop(function(time){
 
 	}, "8n").start(0);
 
-Tone.Transport.start();
-Tone.Transport.bpm.value = 180;
+//Tone.Transport.start();
+//Tone.Transport.bpm.value = 180;
