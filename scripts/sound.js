@@ -70,7 +70,7 @@ function randomizeAll() {
 			if (stepvalue==1) {
 				$("[col="+j+"][row="+i+"]").toggleClass('clicked');
 				//$("[col="+j+"]").addClass('clicked');
-				console.log(i,j);
+				//console.log(i,j);
 			}
 		}
 	}
