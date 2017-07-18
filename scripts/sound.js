@@ -89,7 +89,7 @@ loop = new Tone.Loop(function(time){
 		};
 		step = (step + 1) % numSteps;
 		$("[col="+step+"]").toggleClass('highlight')
-		//console.log(step)
+		console.log(step)
 
 	}, "8n").start(0);
 
