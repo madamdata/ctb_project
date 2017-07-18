@@ -91,5 +91,5 @@ loop = new Tone.Loop(function(time){
 
 	}, "8n").start(0);
 
-//Tone.Transport.start();
-//Tone.Transport.bpm.value = 180;
+Tone.Transport.start();
+Tone.Transport.bpm.value = 180;
