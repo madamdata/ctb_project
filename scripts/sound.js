@@ -88,7 +88,7 @@ loop = new Tone.Loop(function(time){
 			};
 		};
 		step = (step + 1) % numSteps;
-		console.log(step)
+		//console.log(step)
 
 	}, "8n").start(0);
 
