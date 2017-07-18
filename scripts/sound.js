@@ -21,17 +21,17 @@ var samplebank = [
 	"./samples/TL-60Snare61.wav"
 ];
 
-for (i = 0; i<8; i++) {
-	synths[i] = new Tone.MonoSynth(params);
-	synths[i].toMaster();
-	synths[i].volume.value = -10
-};
- 
 //for (i = 0; i<8; i++) {
-	//synths[i] = new Tone.Sampler(samplebank[i]);
+	//synths[i] = new Tone.MonoSynth(params);
 	//synths[i].toMaster();
 	//synths[i].volume.value = -10
 //};
+ 
+for (i = 0; i<8; i++) {
+	synths[i] = new Tone.Sampler(samplebank[i]);
+	synths[i].toMaster();
+	synths[i].volume.value = -10
+};
 
 // store sample locations 
 //for (i = 0; i<8; i++) {
@@ -81,8 +81,8 @@ var chord = [0, 3, 5, 7, 10, 14, 12, 2];
 
 loop = new Tone.Loop(function(time){
 		for (i = 0; i < 8; i++) {
-			var note = Tone.Frequency(chord[i]+60, "midi").toNote();
-			//var note = 0
+			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
+			var note = 0
 			if (sequences[i][step] == 1) {
 				synths[i].triggerAttackRelease(note,0.1)
 			};
