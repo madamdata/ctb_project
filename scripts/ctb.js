@@ -69,6 +69,8 @@ $(document).ready(function(){
 		randomizeAll();
 	});
 
+	$('.play').click(function(){startsequence();});
+
 	var rangeSlider = function(){
 		var slider = $('.range-slider'),
 			range = $('.range-slider__range'),
