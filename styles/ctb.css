@@ -115,12 +115,14 @@ table{
 }
 
 .toolbox{
-  width: 75%;
+  width: 80%;
   display: inline-block;
   margin:; 0 auto;
   font-size: 0.8em;
 }
-
+.toolbox ul li{
+  display: inline-block;
+}
 
 // Base Colors
 $shade-10: #2c3e50 !default;
@@ -252,4 +254,68 @@ $range-label-width: 60px !default;
 input::-moz-focus-inner,
 input::-moz-focus-outer { 
   border: 0; 
+}
+
+
+/**********ABOUT PAGE********/
+img{
+  margin: 0 auto;
+  z-index: 0;
+}
+
+.aboutinfo{
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.aboutleft, .aboutright{
+margin: 0 auto;
+max-width: 35%;
+width: 25%;
+display: inline-block;
+text-align: justify;
+overflow: hidden;
+margin-top: 20px;
+height: 50%;
+border: 1px solid lightgray;
+padding: 15px;
+}
+
+.aboutleft{
+  margin-right: 20px;
+}
+
+.aboutright{
+  margin-left: 20px;
+}
+
+/**********STORIES PAGE********/
+
+.stories{
+  max-width: 85%;
+  display: inline-block;
+  margin-top: 10px;
+  border-topbottom: 1px black solid;
+}
+.stories p{
+  max-width: 60%;
+  display: inline-block;
+  text-align: left;
+  line-height: 2.5;
+}
+
+p::first-letter {
+  float: left;
+  font-size: 5em;
+  margin: 0 .2em 0 0;
+}
+
+.stories:nth-child(even){
+border-right: 1px solid black;
+border-bottom: 1px solid black
+}
+
+.stories:nth-child(odd){
+border-left: 1px solid black;
+border-bottom: 1px solid black
 }
