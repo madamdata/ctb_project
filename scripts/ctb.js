@@ -3,33 +3,41 @@
 $(document).ready(function(){
 
 
-	function generateGrid( rows, cols ) {					//starting grid with 8 x 16
+	// function to generate a grid of buttons with row and column attributes
+	function generateGrid( rows, cols ) {
 		var grid = "<table>";
 		for ( row = 0; row < rows; row++ ) {	
-			grid += "<tr id="+row+">"; 						//gives each row a unique ID number when made
+			grid += "<tr id="+row+">";
 			for ( col = 0; col < cols; col++ ) {      
-				grid += "<td row="+row+" col="+col+"></td>"; //each cell has a 'row' and 'col' attribute	
-			}												//the coordinate style can be changed to whatever works best i just used this because i could 
+				grid += "<td row="+row+" col="+col+"></td>";
+			};
 			grid += "</tr>"; 
 		}
 		return grid;
 	}
 
-	$( "#tableContainer" ).append( generateGrid( 8, 16) );	//this applies the JS code above to the DOM making the grid visible
+	//name various controls
+	var tempoSlider = $("input[id$='temposlider']");
+	tempoSlider.change(function() { changeTempo(this.value)});
+	var numStepsSlider = $("input[id$='numSteps']");
+	numStepsSlider.change(function() { changeNumSteps(this.value)});
 
+	//this applies the JS code above to the DOM making the grid visible
+	$( "#tableContainer" ).append( generateGrid( 8, 16) );
+
+	//click function
 	$( "td" ).click(function() {
-		//var index = $( "td" ).index( this );
 		var row = $(this).attr('row');
 		var col = $(this).attr('col');
 		var state = 0; 
-		$( this ).toggleClass('clicked');					//this adds the class 'clicked' to a cell, it's a toggle and can turn off again with a single click
+		$( this ).toggleClass('clicked');
 		if ($(this).hasClass('clicked')) {state = 1}
 		else {state = 0};
-		//console.log(row,col,state);
 		tog(row,col,state);
 
 	});
 
+	//submit new gridsize function
 	$('#sub').click(function(){								//this code is the same as the above except it deletes the old grid
 		$("#tableContainer").empty();						//and makes a new one with the number of columns the user specified in the text box
 		var width = document.getElementById("value");			//gets the value from the text box
@@ -49,6 +57,8 @@ $(document).ready(function(){
 		}
 
 		$( "#tableContainer" ).append( generateGrid( 8, cols) );
+		resizeGrid(cols);
+		numStepsSlider.prop("max", cols);
 
 		$( "td" ).click(function() {
 			//var index = $( "td" ).index( this );
@@ -63,6 +73,7 @@ $(document).ready(function(){
 			tog(row,col,state);
 
 		});
+
 	});
 
 	$('.randomize').click(function(){
@@ -86,16 +97,11 @@ $(document).ready(function(){
 
 			range.on('input', function(){
 				$(this).next(value).html(this.value);
-				//value = $(this).attr('value');
-				//console.log(value);
 			});
 		});
 	};
 
 	rangeSlider();
-	var tempoSlider = $("input[id$='temposlider']");
-	console.log(tempoSlider);
-	tempoSlider.change(function() { changeTempo(this.value)});
 
 
 	$("div.step_settings").hide();
