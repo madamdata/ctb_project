@@ -2,6 +2,19 @@
 
 $(document).ready(function(){
 
+	//name various controls
+	var tempoSlider = $("input[id$='temposlider']");
+	var numStepsSlider = $("input[id$='numSteps']");
+	var playButton = $("[id='play']");
+	var stopButton = $("[id='stop']");
+	var randomizeButton = $('.randomize');
+
+	//link controls to functions
+	playButton.click(function(){startSequence();});
+	stopButton.click(function(){stopSequence();});
+	tempoSlider.change(function() { changeTempo(this.value)});
+	numStepsSlider.change(function() { changeNumSteps(this.value)});
+	randomizeButton.click(function(){randomizeAll();});
 
 	// function to generate a grid of buttons with row and column attributes
 	function generateGrid( rows, cols ) {
@@ -16,11 +29,6 @@ $(document).ready(function(){
 		return grid;
 	}
 
-	//name various controls
-	var tempoSlider = $("input[id$='temposlider']");
-	tempoSlider.change(function() { changeTempo(this.value)});
-	var numStepsSlider = $("input[id$='numSteps']");
-	numStepsSlider.change(function() { changeNumSteps(this.value)});
 
 	//this applies the JS code above to the DOM making the grid visible
 	$( "#tableContainer" ).append( generateGrid( 8, 16) );
@@ -37,14 +45,13 @@ $(document).ready(function(){
 
 	});
 
-	//submit new gridsize function
-	$('#sub').click(function(){								//this code is the same as the above except it deletes the old grid
-		$("#tableContainer").empty();						//and makes a new one with the number of columns the user specified in the text box
-		var width = document.getElementById("value");			//gets the value from the text box
-		width= parseInt(width.value);							//changes the value from a string to an integer
-		cols = width;											//reassigns the value to cols for the genereateGrid function
-		function generateGrid( rows, cols ) {					//see above
-			//this could have been neater but it works
+	//submit new gridsize function - same as above with different parameters
+	$('#sub').click(function(){
+		$("#tableContainer").empty();
+		var width = document.getElementById("value");
+		width= parseInt(width.value);
+		cols = width;
+		function generateGrid( rows, cols ) {
 			var grid = "<table>";
 			for ( row = 0; row < rows; row++ ) {
 				grid += "<tr id="+row+">"; 
@@ -56,19 +63,21 @@ $(document).ready(function(){
 			return grid;
 		}
 
+		//draw grid
 		$( "#tableContainer" ).append( generateGrid( 8, cols) );
+
+		//resizeGrid is a sound.js function that lets the audio code know that the gridsize has changed.
 		resizeGrid(cols);
+
+		//make sure the Loop Length slider doesn't allow selecting a loop longer than the number of columns/steps
 		numStepsSlider.prop("max", cols);
 
 		$( "td" ).click(function() {
-			//var index = $( "td" ).index( this );
 			var row = $(this).attr('row');
 			var col = $(this).attr('col');
 			var state = 0; 
-			$( this ).toggleClass('clicked');					//this adds the class 'clicked' to a cell, it's a toggle and can turn off again with a single click
-			if ($(this).hasClass('clicked')) {state = 1}
-			else {state = 0};
-			//console.log(row,col,state);
+			$( this ).toggleClass('clicked');
+			if ($(this).hasClass('clicked')) {state = 1} else {state = 0};
 			//trigger the function "tog" defined in sound.js
 			tog(row,col,state);
 
@@ -76,12 +85,7 @@ $(document).ready(function(){
 
 	});
 
-	$('.randomize').click(function(){
-		randomizeAll();
-	});
 
-	$("[id='play']").click(function(){startSequence();});
-	$("[id='stop']").click(function(){stopSequence();});
 
 	var rangeSlider = function(){
 		var slider = $('.range-slider'),
