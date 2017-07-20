@@ -122,12 +122,12 @@
 				<div id="tableContainer"></div>
 			</div>
 
-			<div class="toolbox">
+			<div class="vertical">
 <ul>
 	<li>
 				<div class="range-slider">
 					<p>Loop Length</p>
-				  <input class="range-slider__range" type="range" value="1" min="0" max="64">
+				  <input class="range-slider__range" type="range" value="16" min="1" max="16" id="numSteps">
 				  <span class="range-slider__value">0</span>
 				</div>
 	</li>
@@ -135,6 +135,14 @@
 
 				<div class="range-slider">
 					<p>Tempo</p>
+				  <input class="range-slider__range" type="range" value="180" min="40" max="500" step="1" id="temposlider"> 
+				  <span class="range-slider__value">0</span>
+				</div>
+	</li>
+	<li>
+
+				<div class="range-slider">
+					<p>Start</p>
 				  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
 				  <span class="range-slider__value">0</span>
 				</div>
@@ -142,7 +150,7 @@
 	<li>
 
 				<div class="range-slider">
-					<p>Tempo</p>
+					<p>End</p>
 				  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
 				  <span class="range-slider__value">0</span>
 				</div>
@@ -150,15 +158,7 @@
 	<li>
 
 				<div class="range-slider">
-					<p>Tempo</p>
-				<input class="range-slider__range" type="range" value="180" min="40" max="500" step="1" id="temposlider"> 
-				  <span class="range-slider__value">0</span>
-				</div>
-	</li>
-	<li>
-
-				<div class="range-slider">
-					<p>Tempo</p>
+					<p>Pitch</p>
 				  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
 				  <span class="range-slider__value">0</span>
 				</div>

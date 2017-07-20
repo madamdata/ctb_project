@@ -1,6 +1,8 @@
 var audioCtx = new (window.AudioContext || window.webkitAudioContext);
 var numSamples = 8;
 var numSteps = 16;
+var maxSteps = 64;
+var gridSize = 16;
 var sequences;
 var params = {
 	"oscillator" : { "type" : "sine" },
@@ -34,12 +36,6 @@ for (i = 0; i<8; i++) {
 	synths[i].volume.value = -10
 };
 
-// store sample locations 
-//for (i = 0; i<8; i++) {
-	//samplebank[i] = 
-//};
-
-
 // DEFINE FUNCTIONS
 
 function createSequence(nsamp,nsteps) {
@@ -57,27 +53,41 @@ function testnote(freq, duration) {
 };
 
 function tog(row,column,state) {
-	//console.log(row,column,state);
 	sequences[row][column] = state;
-	console.log(sequences[row]);
+	//console.log(sequences[row]);
 };
 
 function randomizeAll() {
 	$("td").removeClass('clicked');
 	for (i=0;i<8;i++) {
-		for (j=0;j<16;j++) {
+		for (j=0;j<gridSize;j++) {
 			stepvalue = Math.round(Math.random()-0.3);
 			sequences[i][j]=stepvalue
 			if (stepvalue==1) {
 				thisstep = $("[row="+i+"][col="+j+"]");
 				thisstep.addClass('clicked');
-				//console.log(thisstep);
-				//$("[col="+j+"]").addClass('clicked');
-				//console.log(i,j);
 			}
 		}
 	}
 };
+
+//updateGUI() checks the sequence array and makes sure the grid reflects the states of each step
+function updateGUI() {
+	for (i=0;i<8;i++) {
+		for (j=0;j<gridSize;j++) {
+			thisstep = $("[row="+i+"][col="+j+"]");
+			if (sequences[i][j] == 1) {
+				if (!(thisstep.hasClass('clicked'))) {
+					thisstep.addClass('clicked');
+				};
+			} else {
+				if (thisstep.hasClass('clicked')) {
+					thisstep.removeClass('clicked');
+				};
+			}
+		}
+	}
+}
 
 function clearBlink() {
 	$("td").removeClass('highlight');
@@ -96,7 +106,21 @@ function stopSequence() {
 }
 
 function changeTempo(tempo) {
+	bpm = tempo
 	Tone.Transport.bpm.value = tempo
+}
+
+function changeNumSteps(number) {
+	numSteps = number;
+}
+
+function resizeGrid(number) {
+	if (numSteps > number) {
+		numSteps = number
+	};
+	gridSize = number;
+	updateGUI();
+
 }
 
 
@@ -104,8 +128,8 @@ function changeTempo(tempo) {
 
 
 //make blank sequences
-createSequence(numSamples, numSteps);
-console.log(sequences);
+createSequence(numSamples, maxSteps);
+//console.log(sequences);
 
 //start the loop
 var chord = [0, 3, 5, 7, 10, 14, 12, 2];
