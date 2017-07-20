@@ -3,14 +3,12 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="styles/ctb.css">
-		<link rel="stylesheet" href="jquery-modal-master/jquery.modal.css" type="text/css" media="screen" />
 		
 		<script
 			  src="https://code.jquery.com/jquery-1.12.4.min.js"
 			  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
 			  crossorigin="anonymous"></script>	
 		<script src="scripts/ctb.js"></script>
-				<script src="jquery-modal-master/	jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/Tone.js"></script>
 		<script src="scripts/sound.js"></script>
 
@@ -48,13 +46,15 @@
 						  <option value="opt2">Opt2</option>
 						  <option value="opt3">Opt3</option>
 						  <option value="opt4">Opt4</option>
+						  <option value="opt5">Opt5</option>
+						  <option value="opt6">Opt6</option>
 						</select>
 					</li>
 					<li>
 						<input type="radio" name="stepselect" value="step2"> 
 						<select id="sel2">
 						  <option value="opt1">Opt1</option>
-						  <option value="opt2">Opt2</option>
+						  <option value="opt2" >Opt2</option>
 						  <option value="opt3">Opt3</option>
 						  <option value="opt4">Opt4</option>
 						</select>
@@ -64,7 +64,7 @@
 						<select id="sel3">
 						  <option value="opt1">Opt1</option>
 						  <option value="opt2">Opt2</option>
-						  <option value="opt3">Opt3</option>
+						  <option value="opt3" selected="selected">Opt3</option>
 						  <option value="opt4">Opt4</option>
 						</select>
 					</li>	
@@ -74,7 +74,7 @@
 						  <option value="opt1">Opt1</option>
 						  <option value="opt2">Opt2</option>
 						  <option value="opt3">Opt3</option>
-						  <option value="opt4">Opt4</option>
+						  <option value="opt4" selected="selected">Opt4</option>
 						</select>
 					</li>	
 					<li>
@@ -113,19 +113,7 @@
 						  <option value="opt4">Opt4</option>
 						</select>
 					</li>
-					<li>
-
-						<div id="ex1" style="display:none;">
-    					<select id="sel8">
-						  <option value="opt1">Opt1</option>
-						  <option value="opt2">Opt2</option>
-						  <option value="opt3">Opt3</option>
-						  <option value="opt4">Opt4</option>
-						</select>
-						<p>also other options</p>
- 						 </div>
-  						<p><a href="#ex1" rel="modal:open">Open Modal</a></p>
-					</li>	
+				
 				</ul>
 
 			</div>
