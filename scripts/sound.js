@@ -20,6 +20,8 @@ var loop;
 	//"./samples/TL-60Snare61.wav"
 //];
 var samplebank = [
+	"./samples/ctbsamples/drumkit/Kick_1.wav",
+	"./samples/ctbsamples/drumkit/Snare_1.wav",
 	"./samples/ctbsamples/aftercommunitymeeting_chinatownnorth.wav",
 	"./samples/ctbsamples/airconditioning_chinatown.wav",
 	"./samples/ctbsamples/babyathome.wav",
@@ -44,6 +46,20 @@ var samplebank = [
 	"./samples/ctbsamples/VineStreetand13th.wav",
 	"./samples/ctbsamples/WalkSignIsOntoCross10th.wav",
 	"./samples/ctbsamples/WalkSignIsOntoCross11th.wav",
+	"./samples/ctbsamples/drumkit/Cymbal_1.wav",
+	"./samples/ctbsamples/drumkit/Cymbal_2.wav",
+	"./samples/ctbsamples/drumkit/Cymbal_3.wav",
+	"./samples/ctbsamples/drumkit/Drumsnare_2.wav",
+	"./samples/ctbsamples/drumkit/Kick_2.wav",
+	"./samples/ctbsamples/drumkit/Shaker_3.wav",
+	"./samples/ctbsamples/drumkit/Shaker_4.wav",
+	"./samples/ctbsamples/drumkit/Shaker_5.wav",
+	"./samples/ctbsamples/drumkit/Shaker1.wav",
+	"./samples/ctbsamples/drumkit/Snare_3.wav",
+	"./samples/ctbsamples/drumkit/Tom_1.wav",
+	"./samples/ctbsamples/drumkit/Tom_2.wav",
+	"./samples/ctbsamples/drumkit/Voice_1.wav",
+	"./samples/ctbsamples/drumkit/Voice_2.wav",
 ];
 var totalSamples = samplebank.length;
 var currentSample = 0;
@@ -68,13 +84,17 @@ for (i = 0; i<8; i++) {
 // DEFINE FUNCTIONS
 
 function populateSampleMenu() {
+	var tracksampleselectors = $("[id='tracksample']");
 	for (var i = 0; i < samplebank.length; i++) {
 		//$("[id='tracksample']")
-		var tracksampleselectors = $("[id='tracksample']");
 		var samplename = samplebank[i].replace(/^.*(\\|\/|\:)/, '').replace('.wav', '').substring(0,22);
 		//console.log(tracksampleselectors);
 		var optionstring = "<option value='" + i + "'>" + samplename + "</option>";
 		tracksampleselectors.append(optionstring);
+	};
+	for (i=0;i<8;i++) {
+		var track = $("[id='tracksample'][tracknumber="+i+"]");
+		track.val(i);
 	};
 };
 populateSampleMenu();
