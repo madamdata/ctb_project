@@ -58,6 +58,11 @@ nav a{
 .tableContainer{
   max-width: 75%;
 }
+
+table{
+	cursor:pointer;
+
+}
 .step_opt{
   margin-top: 0.5em;
   margin-left: -20px;
