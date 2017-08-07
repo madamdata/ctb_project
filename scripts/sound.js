@@ -4,39 +4,100 @@ var numSteps = 16;
 var maxSteps = 64;
 var gridSize = 16;
 var sequences;
-var params = {
-	"oscillator" : { "type" : "sine" },
-	"envelope" : { "attack" : 0.05, "decay" : 0.1, "sustain": 0.9, "release":0.05 },
-	"filterEnvelope" : { "attack": 0.05, "sustain" : 0.9, "release" : 0.05}
-};
+var params = [{},{},{},{},{},{},{},{}];
 var synths = [0,0,0,0,0,0,0,0];
 var step = 0;
 var bpm = 180;
 var loop;
+//var samplebank = [
+	//"./samples/ctbseqchords.wav",
+	//"./samples/min_kick_13_E.wav",
+	//"./samples/mkbsnare2.wav",
+	//"./samples/TL-60Hat_C04.wav",
+	//"./samples/TL-60Hat_O04.wav",
+	//"./samples/crackle1-0.wav",
+	//"./samples/cracklePew1-1.wav",
+	//"./samples/TL-60Snare61.wav"
+//];
 var samplebank = [
-	"./samples/ctbseqchords.wav",
-	"./samples/min_kick_13_E.wav",
-	"./samples/mkbsnare2.wav",
-	"./samples/TL-60Hat_C04.wav",
-	"./samples/TL-60Hat_O04.wav",
-	"./samples/crackle1-0.wav",
-	"./samples/cracklePew1-1.wav",
-	"./samples/TL-60Snare61.wav"
+	"./samples/ctbsamples/drumkit/Kick_1.wav",
+	"./samples/ctbsamples/drumkit/Snare_1.wav",
+	"./samples/ctbsamples/aftercommunitymeeting_chinatownnorth.wav",
+	"./samples/ctbsamples/airconditioning_chinatown.wav",
+	"./samples/ctbsamples/babyathome.wav",
+	"./samples/ctbsamples/birds_chinatownnorth.wav",
+	"./samples/ctbsamples/BroadandVine.wav",
+	"./samples/ctbsamples/BroadStLine.wav",
+	"./samples/ctbsamples/ChinatownCart.wav",
+	"./samples/ctbsamples/ChinatownRestaurant.wav",
+	"./samples/ctbsamples/construction_chinatown.wav",
+	"./samples/ctbsamples/cookingdinner.wav",
+	"./samples/ctbsamples/Dinnerbreak.wav",
+	"./samples/ctbsamples/fountain_franklin_square.wav",
+	"./samples/ctbsamples/freshenup_sundaybreakfastmission.wav",
+	"./samples/ctbsamples/leaving_asianartsinitiative.wav",
+	"./samples/ctbsamples/movingboxes_chinatown.wav",
+	"./samples/ctbsamples/Musicatchinatownrestaurant.wav",
+	"./samples/ctbsamples/office_sundaybreakfastmission.wav",
+	"./samples/ctbsamples/Rocks_PearlSt_Viaduct.wav",
+	"./samples/ctbsamples/Siren10thRace.wav",
+	"./samples/ctbsamples/thecommute_asianartsinitiative.wav",
+	"./samples/ctbsamples/thecommute_sundaybreakfastmission.wav",
+	"./samples/ctbsamples/VineStreetand13th.wav",
+	"./samples/ctbsamples/WalkSignIsOntoCross10th.wav",
+	"./samples/ctbsamples/WalkSignIsOntoCross11th.wav",
+	"./samples/ctbsamples/drumkit/Cymbal_1.wav",
+	"./samples/ctbsamples/drumkit/Cymbal_2.wav",
+	"./samples/ctbsamples/drumkit/Cymbal_3.wav",
+	"./samples/ctbsamples/drumkit/Drumsnare_2.wav",
+	"./samples/ctbsamples/drumkit/Kick_2.wav",
+	"./samples/ctbsamples/drumkit/Shaker_3.wav",
+	"./samples/ctbsamples/drumkit/Shaker_4.wav",
+	"./samples/ctbsamples/drumkit/Shaker_5.wav",
+	"./samples/ctbsamples/drumkit/Shaker1.wav",
+	"./samples/ctbsamples/drumkit/Snare_3.wav",
+	"./samples/ctbsamples/drumkit/Tom_1.wav",
+	"./samples/ctbsamples/drumkit/Tom_2.wav",
+	"./samples/ctbsamples/drumkit/Voice_1.wav",
+	"./samples/ctbsamples/drumkit/Voice_2.wav",
 ];
+var totalSamples = samplebank.length;
+var currentSample = 0;
 
-//for (i = 0; i<8; i++) {
-	//synths[i] = new Tone.MonoSynth(params);
-	//synths[i].toMaster();
-	//synths[i].volume.value = -10
-//};
- 
+//ajax var ajaxrequest = new XMLHttpRequest()
+
+// CREATE SYNTHS AND INITIALIZE PARAMS
 for (i = 0; i<8; i++) {
+	params[i] = {
+		Pitch: 0,
+		Volume: -10,
+		Start: 0,
+		Length: 0.2,
+	};
 	synths[i] = new Tone.Sampler(samplebank[i]);
+	//synths[i].buffer = buffers[i];
 	synths[i].toMaster();
 	synths[i].volume.value = -10
+	synths[i].player.loop = false;
 };
 
 // DEFINE FUNCTIONS
+
+function populateSampleMenu() {
+	var tracksampleselectors = $("[id='tracksample']");
+	for (var i = 0; i < samplebank.length; i++) {
+		//$("[id='tracksample']")
+		var samplename = samplebank[i].replace(/^.*(\\|\/|\:)/, '').replace('.wav', '').substring(0,22);
+		//console.log(tracksampleselectors);
+		var optionstring = "<option value='" + i + "'>" + samplename + "</option>";
+		tracksampleselectors.append(optionstring);
+	};
+	for (i=0;i<8;i++) {
+		var track = $("[id='tracksample'][tracknumber="+i+"]");
+		track.val(i);
+	};
+};
+populateSampleMenu();
 
 function createSequence(nsamp,nsteps) {
 	sequences = new Array(nsamp);
@@ -71,6 +132,16 @@ function randomizeAll() {
 	}
 };
 
+function clearAll() {
+	console.log("clearing");
+	$("td").removeClass('clicked');
+	for (i=0;i<8;i++) {
+		for (j=0;j<gridSize;j++) {
+			sequences[i][j] = 0;
+		}
+	}
+}
+
 //updateGUI() checks the sequence array and makes sure the grid reflects the states of each step
 function updateGUI() {
 	for (i=0;i<8;i++) {
@@ -93,8 +164,10 @@ function clearBlink() {
 	$("td").removeClass('highlight');
 }
 
+//transport functions
 function startSequence() {
-	Tone.Transport.start();
+	console.log("starting...");
+	Tone.Transport.start('+1');
 	loop.start();
 	Tone.Transport.bpm.value = bpm;
 }
@@ -103,6 +176,43 @@ function stopSequence() {
 	Tone.Transport.stop();
 	clearBlink();
 	step = 0;
+}
+
+//global playback functions
+
+function selectSample(which) {
+	currentSample = which;
+	updateSliders();
+}
+
+function changeTrackSample(track, sample) {
+	//console.log(track, sample);
+	//console.log(synths[track].player);
+	synths[track].player.load(samplebank[sample]);
+}
+
+//         updates the pitch, start and end sliders to reflect current sample parameters
+function updateSliders() {
+	var pitchSlider = $("input[id$='pitchslider']");
+	var startSlider = $("input[id$='startslider']");
+	var lengthSlider = $("input[id$='lengthslider']");
+	var volumeSlider = $("input[id$='volumeslider']");
+	var pitchDisplay = $("[id='pitchsliderdisplay']");
+	var startDisplay = $("[id='startsliderdisplay']");
+	var lengthDisplay = $("[id='lengthsliderdisplay']");
+	var volumeDisplay = $("[id='volumesliderdisplay']");
+	var currentPitch = params[currentSample].Pitch;
+	var currentStart = params[currentSample].Start * 1000;
+	var currentLength = params[currentSample].Length * 1000;
+	var currentVolume = params[currentSample].Volume;
+	pitchSlider.val(currentPitch);
+	pitchDisplay.html(currentPitch);
+	startSlider.val(currentStart);
+	startDisplay.html(currentStart);
+	lengthSlider.val(currentLength);
+	lengthDisplay.html(currentLength);
+	volumeSlider.val(currentVolume);
+	volumeDisplay.html(currentVolume);
 }
 
 function changeTempo(tempo) {
@@ -120,12 +230,26 @@ function resizeGrid(number) {
 	};
 	gridSize = number;
 	updateGUI();
-
 }
 
+//individual sample playback functions
+// called by the pitch slider, modifies the pitch of the current sample
+function changePitch(value) {
+	params[currentSample].Pitch = value;
+}
 
-//synth.triggerAttackRelease("C5", +0.5);
+function changeStart(value) {
+	params[currentSample].Start = value;
+}
 
+function changeLength(value) {
+	params[currentSample].Length = value;
+}
+
+function changeVolume(value) {
+	params[currentSample].Volume = value;
+	console.log(value);
+}
 
 //make blank sequences
 createSequence(numSamples, maxSteps);
@@ -137,9 +261,16 @@ var chord = [0, 3, 5, 7, 10, 14, 12, 2];
 loop = new Tone.Loop(function(time){
 		for (i = 0; i < 8; i++) {
 			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
-			var note = 0
 			if (sequences[i][step] == 1) {
-				synths[i].triggerAttackRelease(note,0.1,time)
+				var note = params[i].Pitch;
+				var start = params[i].Start;
+				var length = params[i].Length;
+				var volume = params[i].Volume;
+				synths[i].player.loopStart = start;
+				synths[i].volume.value = volume;
+				//console.log(synths[i].player.loopStart);
+				synths[i].triggerAttackRelease(note,length,(time+0.02))
+				synths[i].player.seek(start, (time+0.01));
 			};
 		};
 		prevstep = step;
@@ -150,6 +281,3 @@ loop = new Tone.Loop(function(time){
 
 	}, "16n");
 loop.humanize=false;
-
-//Tone.Transport.start();
-//Tone.Transport.bpm.value = 180;

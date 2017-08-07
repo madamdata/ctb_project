@@ -88,10 +88,15 @@ color: white;
 .container{
   margin: 0 auto;
   max-width: 75%;
- /* overflow:  auto*/;
 }
+
 .tableContainer{
   max-width: 75%;
+}
+
+table{
+	cursor:pointer;
+
 }
 .step_opt{
   margin-top: 0.5em;
@@ -126,17 +131,30 @@ ul{
 
 td {
     border: 1px solid;
+    border-color: #dddddd;
     width: 35px;
-  /*    min-width: 30px;
-*/    height: 35px;
+    height: 35px;
+
 }
 .clicked{
-  background-color: #000080;
-  box-shadow: inset 0 0 10px #000000;
+  background-color: #5000A2;
+  box-shadow: inset 0 0 2px #FFFF00;
 }
 
 .highlight{
 	background-color: #ffb6c1;
+	/*border: none;*/
+}
+
+select{
+	/*-webkit-border-radius: 20px;*/
+	-border-radius:0px;
+	background-color: #bb44df;
+	color: #FFFFFF;
+}
+
+input{
+	background-color:#bb99ef;
 }
 
 section{
@@ -152,7 +170,7 @@ table{
 .toolbox{
   width: 80%;
   display: inline-block;
-  margin:; 0 auto;
+  margin: 0 auto;
   font-size: 0.8em;
 }
 .toolbox ul li{
@@ -191,9 +209,6 @@ $teal: #1abc9c !default;
   }*/
 }
 
-
-
-
 // Range Slider
 $range-width: 100% !default;
 
@@ -205,7 +220,7 @@ $range-track-color: $shade-1 !default;
 $range-track-height: 10px !default;
 
 $range-label-color: $shade-10 !default;
-$range-label-width: 60px !default;
+$range-label-width: 30px !default;
 
 .range-slider {
   width: $range-width;
@@ -213,9 +228,10 @@ $range-label-width: 60px !default;
 
 .range-slider__range {
   -webkit-appearance: none;
-  width: calc(100% - (#{$range-label-width + 13px}));
+  /*width: calc(100% - (#{$range-label-width + 13px}));*/
+  width: 150px;
   height: $range-track-height;
-  border-radius: 5px;
+  border-radius: 10px;
   background: $range-track-color;
   outline: none;
   padding: 0;
@@ -364,6 +380,7 @@ border-bottom: 1px solid black
 border-left: 1px solid black;
 border-bottom: 1px solid black
 }
+
 
  /* The alert message box */
 .alert {
