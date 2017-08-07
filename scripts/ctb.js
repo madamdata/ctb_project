@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var numStepsSlider = $("input[id$='numSteps']");
 	var pitchSlider = $("input[id$='pitchslider']");
 	var startSlider = $("input[id$='startslider']");
+	var lengthSlider = $("input[id$='lengthslider']");
 	var sampleSelectors = $("[name='sampleselector']");
 	var tracksampleselectors = $("[id='tracksample']");
 	var playButton = $("[id='play']");
@@ -22,6 +23,7 @@ $(document).ready(function(){
 	tempoSlider.change(function() { changeTempo(this.value)});
 	pitchSlider.change(function() { changePitch(this.value)});
 	startSlider.change(function() { changeStart(this.value/1000)});
+	lengthSlider.change(function() { changeLength(this.value/1000)});
 	numStepsSlider.change(function() { changeNumSteps(this.value)});
 	randomizeButton.click(function(){randomizeAll();});
 	resetButton.click(function(){clearAll()});

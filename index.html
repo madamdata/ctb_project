@@ -27,11 +27,10 @@
 		<section>
 			<h2>Sequencer</h2>
 	  		<input type="text" maxlength="2" name="value" id='value' value='16'/>
-			<input type="button" value="submit" id="sub"/>
+			<input type="button" value="<-resize" id="sub"/>
 			<button class="randomize">???</button>
 			<button id="play">Play</button>
 			<button id="stop">Stop</button>
-			<button id="pause">Pause</button>
 			<button id="reset">Reset</button>
 
 			<div class="step_opt">
@@ -113,9 +112,9 @@
 	<li>
 
 				<div class="range-slider">
-					<p>End</p>
-				  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
-				  <span class="range-slider__value">0</span>
+					<p>Length</p>
+					<input class="range-slider__range" type="range" value="500" min="15" max="1500" step="1" id="lengthslider">
+				  <span class="range-slider__value" id = "lengthsliderdisplay">0</span>
 				</div>
 	</li>
 	<li>
@@ -129,7 +128,7 @@
 	<li>
 
 				<div class="range-slider">
-					<p>Tempo</p>
+					<p>Volume</p>
 				  <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
 				  <span class="range-slider__value">0</span>
 				</div>

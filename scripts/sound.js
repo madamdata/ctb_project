@@ -64,8 +64,7 @@ var samplebank = [
 var totalSamples = samplebank.length;
 var currentSample = 0;
 
-//ajax
-var ajaxrequest = new XMLHttpRequest()
+//ajax var ajaxrequest = new XMLHttpRequest()
 
 // CREATE SYNTHS AND INITIALIZE PARAMS
 for (i = 0; i<8; i++) {
@@ -73,7 +72,7 @@ for (i = 0; i<8; i++) {
 		Pitch: 0,
 		Volume: 1,
 		Start: 0,
-		End: 1,
+		Length: 0.2,
 	};
 	synths[i] = new Tone.Sampler(samplebank[i]);
 	//synths[i].buffer = buffers[i];
@@ -193,10 +192,20 @@ function changeTrackSample(track, sample) {
 //         updates the pitch, start and end sliders to reflect current sample parameters
 function updateSliders() {
 	var pitchSlider = $("input[id$='pitchslider']");
-	var display = $("[id='pitchsliderdisplay']");
+	var startSlider = $("input[id$='startslider']");
+	var lengthSlider = $("input[id$='lengthslider']");
+	var pitchDisplay = $("[id='pitchsliderdisplay']");
+	var startDisplay = $("[id='startsliderdisplay']");
+	var lengthDisplay = $("[id='lengthsliderdisplay']");
 	var currentPitch = params[currentSample].Pitch;
+	var currentStart = params[currentSample].Start * 1000;
+	var currentLength = params[currentSample].Length * 1000;
 	pitchSlider.val(currentPitch);
-	display.html(currentPitch);
+	pitchDisplay.html(currentPitch);
+	startSlider.val(currentStart);
+	startDisplay.html(currentStart);
+	lengthSlider.val(currentLength);
+	lengthDisplay.html(currentLength);
 }
 
 function changeTempo(tempo) {
@@ -223,8 +232,11 @@ function changePitch(value) {
 }
 
 function changeStart(value) {
-	console.log(value);
 	params[currentSample].Start = value;
+}
+
+function changeLength(value) {
+	params[currentSample].Length = value;
 }
 
 //make blank sequences
@@ -240,9 +252,10 @@ loop = new Tone.Loop(function(time){
 			if (sequences[i][step] == 1) {
 				var note = params[i].Pitch;
 				var start = params[i].Start;
+				var length = params[i].Length;
 				synths[i].player.loopStart = start;
 				//console.log(synths[i].player.loopStart);
-				synths[i].triggerAttackRelease(note,0.8,time)
+				synths[i].triggerAttackRelease(note,length,time)
 				synths[i].player.seek(start, time);
 			};
 		};
