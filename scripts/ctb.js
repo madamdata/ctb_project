@@ -5,6 +5,10 @@ $(document).ready(function(){
 	//name various controls
 	var tempoSlider = $("input[id$='temposlider']");
 	var numStepsSlider = $("input[id$='numSteps']");
+	var pitchSlider = $("input[id$='pitchslider']");
+	var startSlider = $("input[id$='startslider']");
+	var sampleSelectors = $("[name='sampleselector']");
+	var tracksampleselectors = $("[id='tracksample']");
 	var playButton = $("[id='play']");
 	var stopButton = $("[id='stop']");
 	var randomizeButton = $('.randomize');
@@ -12,7 +16,11 @@ $(document).ready(function(){
 	//link controls to functions
 	playButton.click(function(){startSequence();});
 	stopButton.click(function(){stopSequence();});
+	sampleSelectors.click(function(){selectSample(this.value)});
+	tracksampleselectors.change(function() {changeTrackSample($(this).attr('tracknumber'),this.value)});
 	tempoSlider.change(function() { changeTempo(this.value)});
+	pitchSlider.change(function() { changePitch(this.value)});
+	startSlider.change(function() { changeStart(this.value/1000)});
 	numStepsSlider.change(function() { changeNumSteps(this.value)});
 	randomizeButton.click(function(){randomizeAll();});
 
@@ -109,7 +117,7 @@ $(document).ready(function(){
 
 
 	$("div.step_settings").hide();
-	$("input[name$='stepselect']").click(function() {
+	$("input[name$='sampleselector']").click(function() {
 		var test = $(this).val();
 		$("div.step_settings").hide();
 		$("#" + test).show();
