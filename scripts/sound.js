@@ -132,6 +132,16 @@ function randomizeAll() {
 	}
 };
 
+function clearAll() {
+	console.log("clearing");
+	$("td").removeClass('clicked');
+	for (i=0;i<8;i++) {
+		for (j=0;j<gridSize;j++) {
+			sequences[i][j] = 0;
+		}
+	}
+}
+
 //updateGUI() checks the sequence array and makes sure the grid reflects the states of each step
 function updateGUI() {
 	for (i=0;i<8;i++) {

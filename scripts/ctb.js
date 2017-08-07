@@ -12,6 +12,7 @@ $(document).ready(function(){
 	var playButton = $("[id='play']");
 	var stopButton = $("[id='stop']");
 	var randomizeButton = $('.randomize');
+	var resetButton = $("[id='reset']");
 
 	//link controls to functions
 	playButton.click(function(){startSequence();});
@@ -23,6 +24,7 @@ $(document).ready(function(){
 	startSlider.change(function() { changeStart(this.value/1000)});
 	numStepsSlider.change(function() { changeNumSteps(this.value)});
 	randomizeButton.click(function(){randomizeAll();});
+	resetButton.click(function(){clearAll()});
 
 	// function to generate a grid of buttons with row and column attributes
 	function generateGrid( rows, cols ) {
