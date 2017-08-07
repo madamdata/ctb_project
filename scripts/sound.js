@@ -167,7 +167,7 @@ function clearBlink() {
 //transport functions
 function startSequence() {
 	console.log("starting...");
-	Tone.Transport.start('+1');
+	Tone.Transport.start('+0.05');
 	loop.start();
 	Tone.Transport.bpm.value = bpm;
 }
