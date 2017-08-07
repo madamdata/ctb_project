@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 	//link controls to functions
 	playButton.click(function(){startSequence();});
-	playButton.on('click touchstart', function(){startSequence();});
+	//playButton.on('click touchstart', function(){startSequence();});
 	stopButton.click(function(){stopSequence();});
 	sampleSelectors.click(function(){selectSample(this.value)});
 	tracksampleselectors.change(function() {changeTrackSample($(this).attr('tracknumber'),this.value)});
