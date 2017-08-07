@@ -268,8 +268,8 @@ loop = new Tone.Loop(function(time){
 				synths[i].player.loopStart = start;
 				synths[i].volume.value = volume;
 				//console.log(synths[i].player.loopStart);
-				synths[i].triggerAttackRelease(note,length,time)
-				synths[i].player.seek(start, time);
+				synths[i].triggerAttackRelease(note,length,(time+0.02))
+				synths[i].player.seek(start, (time+0.01));
 			};
 		};
 		prevstep = step;
