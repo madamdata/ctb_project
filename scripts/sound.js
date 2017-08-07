@@ -70,7 +70,7 @@ var currentSample = 0;
 for (i = 0; i<8; i++) {
 	params[i] = {
 		Pitch: 0,
-		Volume: 1,
+		Volume: -10,
 		Start: 0,
 		Length: 0.2,
 	};
@@ -78,6 +78,7 @@ for (i = 0; i<8; i++) {
 	//synths[i].buffer = buffers[i];
 	synths[i].toMaster();
 	synths[i].volume.value = -10
+	synths[i].player.loop = false;
 };
 
 // DEFINE FUNCTIONS
@@ -194,18 +195,23 @@ function updateSliders() {
 	var pitchSlider = $("input[id$='pitchslider']");
 	var startSlider = $("input[id$='startslider']");
 	var lengthSlider = $("input[id$='lengthslider']");
+	var volumeSlider = $("input[id$='volumeslider']");
 	var pitchDisplay = $("[id='pitchsliderdisplay']");
 	var startDisplay = $("[id='startsliderdisplay']");
 	var lengthDisplay = $("[id='lengthsliderdisplay']");
+	var volumeDisplay = $("[id='volumesliderdisplay']");
 	var currentPitch = params[currentSample].Pitch;
 	var currentStart = params[currentSample].Start * 1000;
 	var currentLength = params[currentSample].Length * 1000;
+	var currentVolume = params[currentSample].Volume;
 	pitchSlider.val(currentPitch);
 	pitchDisplay.html(currentPitch);
 	startSlider.val(currentStart);
 	startDisplay.html(currentStart);
 	lengthSlider.val(currentLength);
 	lengthDisplay.html(currentLength);
+	volumeSlider.val(currentVolume);
+	volumeDisplay.html(currentVolume);
 }
 
 function changeTempo(tempo) {
@@ -239,6 +245,11 @@ function changeLength(value) {
 	params[currentSample].Length = value;
 }
 
+function changeVolume(value) {
+	params[currentSample].Volume = value;
+	console.log(value);
+}
+
 //make blank sequences
 createSequence(numSamples, maxSteps);
 //console.log(sequences);
@@ -253,7 +264,9 @@ loop = new Tone.Loop(function(time){
 				var note = params[i].Pitch;
 				var start = params[i].Start;
 				var length = params[i].Length;
+				var volume = params[i].Volume;
 				synths[i].player.loopStart = start;
+				synths[i].volume.value = volume;
 				//console.log(synths[i].player.loopStart);
 				synths[i].triggerAttackRelease(note,length,time)
 				synths[i].player.seek(start, time);
