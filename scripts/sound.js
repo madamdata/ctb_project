@@ -72,7 +72,7 @@ for (i = 0; i<8; i++) {
 		Pitch: 0,
 		Volume: -10,
 		Start: 0,
-		Length: 0.2,
+		Length: 0.35,
 	};
 	synths[i] = new Tone.Sampler(samplebank[i]);
 	//synths[i].buffer = buffers[i];
@@ -88,7 +88,6 @@ function populateSampleMenu() {
 	for (var i = 0; i < samplebank.length; i++) {
 		//$("[id='tracksample']")
 		var samplename = samplebank[i].replace(/^.*(\\|\/|\:)/, '').replace('.wav', '').substring(0,22);
-		//console.log(tracksampleselectors);
 		var optionstring = "<option value='" + i + "'>" + samplename + "</option>";
 		tracksampleselectors.append(optionstring);
 	};
@@ -115,7 +114,6 @@ function testnote(freq, duration) {
 
 function tog(row,column,state) {
 	sequences[row][column] = state;
-	//console.log(sequences[row]);
 };
 
 function randomizeAll() {
@@ -133,7 +131,6 @@ function randomizeAll() {
 };
 
 function clearAll() {
-	console.log("clearing");
 	$("td").removeClass('clicked');
 	for (i=0;i<8;i++) {
 		for (j=0;j<gridSize;j++) {
@@ -166,7 +163,6 @@ function clearBlink() {
 
 //transport functions
 function startSequence() {
-	console.log("starting...");
 	Tone.Transport.start('+0.05');
 	loop.start();
 	Tone.Transport.bpm.value = bpm;
@@ -248,12 +244,10 @@ function changeLength(value) {
 
 function changeVolume(value) {
 	params[currentSample].Volume = value;
-	console.log(value);
 }
 
 //make blank sequences
 createSequence(numSamples, maxSteps);
-//console.log(sequences);
 
 //start the loop
 var chord = [0, 3, 5, 7, 10, 14, 12, 2];
@@ -267,10 +261,8 @@ loop = new Tone.Loop(function(time){
 				var start = params[i].Start * synths[i].player.buffer.duration;
 				var length = params[i].Length;
 				var volume = params[i].Volume;
-				console.log(start);
 				//synths[i].player.loopStart = start;
 				synths[i].volume.value = volume;
-				//console.log(synths[i].player.loopStart);
 				synths[i].player.playbackRate = Math.pow(twelfthroot, note);
 				synths[i].player.start((time+0.01),start, length);
 				synths[i].envelope.triggerAttackRelease(length,(time+0.01));
@@ -285,5 +277,7 @@ loop = new Tone.Loop(function(time){
 	}, "16n");
 loop.humanize=false;
 
+updateSliders();
 //startaudiocontext - needed for iOS devices to manually start the audio engine. 
+
 StartAudioContext(Tone.context, "#play");
