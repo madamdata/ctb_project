@@ -281,3 +281,5 @@ loop = new Tone.Loop(function(time){
 
 	}, "16n");
 loop.humanize=false;
+
+StartAudioContext(Tone.context, "#play");
