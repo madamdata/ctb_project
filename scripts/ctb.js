@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var lengthSlider = $("input[id$='lengthslider']");
 	var volumeSlider = $("input[id$='volumeslider']");
 	var sampleSelectors = $("[name='sampleselector']");
-	var tracksampleselectors = $("[class='tracksample']");
+	var tracksampleselectors = $("[class='tracksample rounded']");
 	var playButton = $("[id='play']");
 	var stopButton = $("[id='stop']");
 	var randomizeButton = $("[id='randomize']");

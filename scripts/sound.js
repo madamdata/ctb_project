@@ -186,7 +186,7 @@ function selectSample(which) {
 }
 
 function changeTrackSample(track, sample) {
-	//console.log(track, sample);
+	console.log(track, sample);
 	//console.log(synths[track].player);
 	synths[track].player.load(samplebank[sample]);
 }
