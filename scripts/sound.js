@@ -282,5 +282,5 @@ loop = new Tone.Loop(function(time){
 	}, "16n");
 loop.humanize=false;
 
-console.log("starting audio context...");
+//startaudiocontext - needed for iOS devices to manually start the audio engine. 
 StartAudioContext(Tone.context, "#play");
