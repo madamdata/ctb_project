@@ -198,7 +198,7 @@ function updateSliders() {
 	var lengthDisplay = $("[id='lengthsliderdisplay']");
 	var volumeDisplay = $("[id='volumesliderdisplay']");
 	var currentPitch = params[currentSample].Pitch;
-	var currentStart = params[currentSample].Start * 1000;
+	var currentStart = params[currentSample].Start;
 	var currentLength = params[currentSample].Length * 1000;
 	var currentVolume = params[currentSample].Volume;
 	pitchSlider.val(currentPitch);
