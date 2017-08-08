@@ -254,6 +254,8 @@ var chord = [0, 3, 5, 7, 10, 14, 12, 2];
 
 loop = new Tone.Loop(function(time){
 		const twelfthroot = Math.pow(2, (1/12));
+		prevstep = step;
+		step = (step + 1) % numSteps;
 		for (i = 0; i < 8; i++) {
 			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
 			if (sequences[i][step] == 1) {
@@ -268,8 +270,6 @@ loop = new Tone.Loop(function(time){
 				synths[i].envelope.triggerAttackRelease(length,(time+0.01));
 			};
 		};
-		prevstep = step;
-		step = (step + 1) % numSteps;
 		$("[col="+step+"]").addClass('highlight')
 		$("[col="+prevstep+"]").removeClass('highlight')
 		//console.log(step)
