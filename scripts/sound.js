@@ -84,7 +84,7 @@ for (i = 0; i<8; i++) {
 // DEFINE FUNCTIONS
 
 function populateSampleMenu() {
-	var tracksampleselectors = $("[id='tracksample']");
+	var tracksampleselectors = $('.tracksample');
 	for (var i = 0; i < samplebank.length; i++) {
 		//$("[id='tracksample']")
 		var samplename = samplebank[i].replace(/^.*(\\|\/|\:)/, '').replace('.wav', '').substring(0,22);
@@ -93,7 +93,7 @@ function populateSampleMenu() {
 		tracksampleselectors.append(optionstring);
 	};
 	for (i=0;i<8;i++) {
-		var track = $("[id='tracksample'][tracknumber="+i+"]");
+		var track = $("[class$='tracksample rounded'][tracknumber="+i+"]");
 		track.val(i);
 	};
 };

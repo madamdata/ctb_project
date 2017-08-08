@@ -10,10 +10,10 @@ $(document).ready(function(){
 	var lengthSlider = $("input[id$='lengthslider']");
 	var volumeSlider = $("input[id$='volumeslider']");
 	var sampleSelectors = $("[name='sampleselector']");
-	var tracksampleselectors = $("[id='tracksample']");
+	var tracksampleselectors = $("[class='tracksample']");
 	var playButton = $("[id='play']");
 	var stopButton = $("[id='stop']");
-	var randomizeButton = $('.randomize');
+	var randomizeButton = $("[id='randomize']");
 	var resetButton = $("[id='reset']");
 
 	//link controls to functions
