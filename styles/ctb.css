@@ -334,9 +334,9 @@ display: inline-block;
 text-align: justify;
 overflow: hidden;
 margin-top: 20px;
-height: 50%;
-border: 1px solid lightgray;
-padding: 15px;
+height: 60%;
+/*border: 1px solid lightgray;
+*/padding: 15px;
 }
 
 .aboutleft{
@@ -349,7 +349,17 @@ padding: 15px;
   vertical-align: text-top;
 }
 
+.aboutimg{
+  width: 75%;
+  margin: 0 auto;
+}
 
+.aboutimg img{
+  margin: 0 auto;
+  max-height: 200px;
+  max-width: 500px;
+  display: inline;
+}
 /**********STORIES PAGE********/
 
 .stories{
