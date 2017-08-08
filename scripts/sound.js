@@ -259,6 +259,7 @@ createSequence(numSamples, maxSteps);
 var chord = [0, 3, 5, 7, 10, 14, 12, 2];
 
 loop = new Tone.Loop(function(time){
+		const twelfthroot = Math.pow(2, (1/12));
 		for (i = 0; i < 8; i++) {
 			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
 			if (sequences[i][step] == 1) {
@@ -270,6 +271,7 @@ loop = new Tone.Loop(function(time){
 				//synths[i].player.loopStart = start;
 				synths[i].volume.value = volume;
 				//console.log(synths[i].player.loopStart);
+				synths[i].player.playbackRate = Math.pow(twelfthroot, note);
 				synths[i].player.start((time+0.01),start, length);
 				synths[i].envelope.triggerAttackRelease(length,(time+0.01));
 			};
