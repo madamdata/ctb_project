@@ -263,14 +263,15 @@ loop = new Tone.Loop(function(time){
 			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
 			if (sequences[i][step] == 1) {
 				var note = params[i].Pitch;
-				var start = params[i].Start;
+				var start = params[i].Start * synths[i].player.buffer.duration;
 				var length = params[i].Length;
 				var volume = params[i].Volume;
-				synths[i].player.loopStart = start;
+				console.log(start);
+				//synths[i].player.loopStart = start;
 				synths[i].volume.value = volume;
 				//console.log(synths[i].player.loopStart);
-				synths[i].triggerAttackRelease(note,length,(time+0.02))
-				synths[i].player.seek(start, (time+0.01));
+				synths[i].player.start((time+0.01),start, length);
+				synths[i].envelope.triggerAttackRelease(length,(time+0.01));
 			};
 		};
 		prevstep = step;

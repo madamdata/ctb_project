@@ -24,7 +24,7 @@ $(document).ready(function(){
 	tracksampleselectors.change(function() {changeTrackSample($(this).attr('tracknumber'),this.value)});
 	tempoSlider.change(function() { changeTempo(this.value)});
 	pitchSlider.change(function() { changePitch(this.value)});
-	startSlider.change(function() { changeStart(this.value/1000)});
+	startSlider.change(function() { changeStart(this.value)});
 	lengthSlider.change(function() { changeLength(this.value/1000)});
 	volumeSlider.change(function() { changeVolume(this.value)});
 	numStepsSlider.change(function() { changeNumSteps(this.value)});
