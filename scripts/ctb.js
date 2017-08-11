@@ -10,10 +10,10 @@ $(document).ready(function(){
 	var lengthSlider = $("input[id$='lengthslider']");
 	var volumeSlider = $("input[id$='volumeslider']");
 	var sampleSelectors = $("[name='sampleselector']");
-	var tracksampleselectors = $("[id='tracksample']");
+	var tracksampleselectors = $("[class='tracksample rounded']");
 	var playButton = $("[id='play']");
 	var stopButton = $("[id='stop']");
-	var randomizeButton = $('.randomize');
+	var randomizeButton = $("[id='randomize']");
 	var resetButton = $("[id='reset']");
 
 	//link controls to functions
@@ -24,7 +24,7 @@ $(document).ready(function(){
 	tracksampleselectors.change(function() {changeTrackSample($(this).attr('tracknumber'),this.value)});
 	tempoSlider.change(function() { changeTempo(this.value)});
 	pitchSlider.change(function() { changePitch(this.value)});
-	startSlider.change(function() { changeStart(this.value/1000)});
+	startSlider.change(function() { changeStart(this.value)});
 	lengthSlider.change(function() { changeLength(this.value/1000)});
 	volumeSlider.change(function() { changeVolume(this.value)});
 	numStepsSlider.change(function() { changeNumSteps(this.value)});

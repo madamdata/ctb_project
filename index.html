@@ -20,9 +20,9 @@
 				</a>
 				<a href="index.html"><img id="banner" src="images/ctb_lb1.jpg"></a>
 			<nav>
-				<a href="about.html">  About  </a>
+				<a href="about.html">  about  </a>
 
-				<a href="stories.html">  Stories  </a>
+				<a href="stories.html">  stories  </a>
 			</nav>
 		</header>
 		 <div class="alert">
@@ -32,52 +32,59 @@
 		<section>
 			<h2></h2>
 	  		<input type="text" maxlength="2" name="value" id='value' value='16'/>
-			<input type="button" value="<-resize" id="sub"/>
-			<button class="randomize">???</button>
-			<button id="play">Play</button>
-			<button id="stop">Stop</button>
-			<button id="reset">Reset</button>
+			<input type="button" class="resizebutton" value="<-resize" id="sub"/>
+			<button id="randomize" class="transportbutton">???</button>
+			<button id="play" class="transportbutton">play</button>
+			<button id="stop" class="transportbutton">stop</button>
+			<button id="reset" class="transportbutton">reset</button>
+			<p class="sliderlabel">loop length
+				<input class="range-slider__range" type="range" value="16" min="1" max="16" id="numSteps">
+				  <span class="range-slider__value">0</span>
+				         Tempo
+				  <input class="range-slider__range" type="range" value="180" min="40" max="300" step="1" id="temposlider"> 
+				  <span class="range-slider__value">0</span>
+			</p> 
 
 			<div class="step_opt">
 				<ul class='sqopt'>
 					<li>
 						<input type="radio" checked="checked" name='sampleselector' value="0">
-						<select id='tracksample' tracknumber="0">
+						<select class="tracksample rounded" tracknumber="0">
 						</select>
 					</li>
 					<li>
 						<input type="radio" name='sampleselector' value="1"> 
-						<select id='tracksample' tracknumber="1">
+						<select  class="tracksample rounded" tracknumber="1">
 						</select>
 					</li>
 					<li>
 						<input type="radio" name='sampleselector' value="2"> 
-						<select id='tracksample' tracknumber="2">
+						<select class="tracksample rounded" tracknumber="2">
 						</select>
 					</li>	
 					<li>
 						<input type="radio" name='sampleselector' value="3"> 
-						<select id='tracksample' tracknumber="3">
+						<select class="tracksample rounded" tracknumber="3">
 						</select>
 					</li>	
 					<li>
 						<input type="radio" name='sampleselector' value="4"> 
-						<select id='tracksample' tracknumber="4">
+						<select class="tracksample rounded" tracknumber="4">
 						</select>
 					</li>
 					<li>
 						<input type="radio" name='sampleselector' value="5"> 
-						<select id='tracksample' tracknumber="5">
+						<select class="tracksample rounded" tracknumber="5">
 						</select>
 					</li>	
 					<li>
 						<input type="radio" name='sampleselector' value="6"> 
-						<select id='tracksample' tracknumber="6">
+						<select class="tracksample rounded" tracknumber="6">
 						</select>
 					</li>	
 					<li>
 						<input type="radio" name='sampleselector' value="7"> 
-						<select id='tracksample' tracknumber="7">
+						<select class="tracksample rounded" tracknumber="7">
 						</select>
 					</li>
 				
@@ -91,33 +98,19 @@
 
 			<div class="toolbox">
 <ul>
-	<li>
-				<div class="range-slider">
-					<p>Loop Length</p>
-				  <input class="range-slider__range" type="range" value="16" min="1" max="16" id="numSteps">
-				  <span class="range-slider__value">0</span>
-				</div>
-	</li>
+
 	<li>
 
 				<div class="range-slider">
-					<p>Tempo</p>
-				  <input class="range-slider__range" type="range" value="180" min="40" max="300" step="1" id="temposlider"> 
-				  <span class="range-slider__value">0</span>
-				</div>
-	</li>
-	<li>
-
-				<div class="range-slider">
-					<p>Start</p>
-				  <input class="range-slider__range" type="range" value="0" min="0" max="10000" step="1" id="startslider">
+					<p class='sliderlabel'>Start</p>
+				  <input class="range-slider__range" type="range" value="0" min="0" max="1" step="0.001" id="startslider">
 				  <span class="range-slider__value" id = "startsliderdisplay">0</span>
 				</div>
 	</li>
 	<li>
 
 				<div class="range-slider">
-					<p>Length</p>
+					<p class='sliderlabel'>Length</p>
 					<input class="range-slider__range" type="range" value="500" min="15" max="1500" step="1" id="lengthslider">
 				  <span class="range-slider__value" id = "lengthsliderdisplay">0</span>
 				</div>
@@ -125,7 +118,7 @@
 	<li>
 
 				<div class="range-slider">
-					<p>Pitch</p>
+					<p class='sliderlabel'>Pitch</p>
 				  <input class="range-slider__range" type="range" value="0" min="-24" max="24" step="1" id="pitchslider">
 				  <span class="range-slider__value" id = "pitchsliderdisplay">0</span>
 				</div>
@@ -133,7 +126,7 @@
 	<li>
 
 				<div class="range-slider">
-					<p>Volume</p>
+					<p class='sliderlabel'>Volume</p>
 					<input class="range-slider__range" type="range" value="-10" min="-40" max="4" step="1" id="volumeslider">
 				  <span class="range-slider__value" id = "volumesliderdisplay">0</span>
 				</div>
@@ -161,6 +154,7 @@
 			</div>
 		</section>
 
+		<script src="scripts/startaudiocontext.js"></script>
 		<script src="scripts/ctb.js"></script>
 		<script src="scripts/Tone.js"></script>
 		<script src="scripts/sound.js"></script>

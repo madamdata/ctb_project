@@ -72,7 +72,7 @@ for (i = 0; i<8; i++) {
 		Pitch: 0,
 		Volume: -10,
 		Start: 0,
-		Length: 0.2,
+		Length: 0.35,
 	};
 	synths[i] = new Tone.Sampler(samplebank[i]);
 	//synths[i].buffer = buffers[i];
@@ -84,16 +84,15 @@ for (i = 0; i<8; i++) {
 // DEFINE FUNCTIONS
 
 function populateSampleMenu() {
-	var tracksampleselectors = $("[id='tracksample']");
+	var tracksampleselectors = $('.tracksample');
 	for (var i = 0; i < samplebank.length; i++) {
 		//$("[id='tracksample']")
 		var samplename = samplebank[i].replace(/^.*(\\|\/|\:)/, '').replace('.wav', '').substring(0,22);
-		//console.log(tracksampleselectors);
 		var optionstring = "<option value='" + i + "'>" + samplename + "</option>";
 		tracksampleselectors.append(optionstring);
 	};
 	for (i=0;i<8;i++) {
-		var track = $("[id='tracksample'][tracknumber="+i+"]");
+		var track = $("[class$='tracksample rounded'][tracknumber="+i+"]");
 		track.val(i);
 	};
 };
@@ -115,7 +114,6 @@ function testnote(freq, duration) {
 
 function tog(row,column,state) {
 	sequences[row][column] = state;
-	//console.log(sequences[row]);
 };
 
 function randomizeAll() {
@@ -133,7 +131,6 @@ function randomizeAll() {
 };
 
 function clearAll() {
-	console.log("clearing");
 	$("td").removeClass('clicked');
 	for (i=0;i<8;i++) {
 		for (j=0;j<gridSize;j++) {
@@ -166,8 +163,7 @@ function clearBlink() {
 
 //transport functions
 function startSequence() {
-	console.log("starting...");
-	Tone.Transport.start('+1');
+	Tone.Transport.start('+0.05');
 	loop.start();
 	Tone.Transport.bpm.value = bpm;
 }
@@ -186,7 +182,7 @@ function selectSample(which) {
 }
 
 function changeTrackSample(track, sample) {
-	//console.log(track, sample);
+	console.log(track, sample);
 	//console.log(synths[track].player);
 	synths[track].player.load(samplebank[sample]);
 }
@@ -202,7 +198,7 @@ function updateSliders() {
 	var lengthDisplay = $("[id='lengthsliderdisplay']");
 	var volumeDisplay = $("[id='volumesliderdisplay']");
 	var currentPitch = params[currentSample].Pitch;
-	var currentStart = params[currentSample].Start * 1000;
+	var currentStart = params[currentSample].Start;
 	var currentLength = params[currentSample].Length * 1000;
 	var currentVolume = params[currentSample].Volume;
 	pitchSlider.val(currentPitch);
@@ -248,36 +244,40 @@ function changeLength(value) {
 
 function changeVolume(value) {
 	params[currentSample].Volume = value;
-	console.log(value);
 }
 
 //make blank sequences
 createSequence(numSamples, maxSteps);
-//console.log(sequences);
 
 //start the loop
 var chord = [0, 3, 5, 7, 10, 14, 12, 2];
 
 loop = new Tone.Loop(function(time){
+		const twelfthroot = Math.pow(2, (1/12));
+		prevstep = step;
+		step = (step + 1) % numSteps;
 		for (i = 0; i < 8; i++) {
 			//var note = Tone.Frequency(chord[i]+60, "midi").toNote();
 			if (sequences[i][step] == 1) {
 				var note = params[i].Pitch;
-				var start = params[i].Start;
+				var start = params[i].Start * synths[i].player.buffer.duration;
 				var length = params[i].Length;
 				var volume = params[i].Volume;
-				synths[i].player.loopStart = start;
+				//synths[i].player.loopStart = start;
 				synths[i].volume.value = volume;
-				//console.log(synths[i].player.loopStart);
-				synths[i].triggerAttackRelease(note,length,(time+0.02))
-				synths[i].player.seek(start, (time+0.01));
+				synths[i].player.playbackRate = Math.pow(twelfthroot, note);
+				synths[i].player.start((time+0.01),start, length);
+				synths[i].envelope.triggerAttackRelease(length,(time+0.01));
 			};
 		};
-		prevstep = step;
-		step = (step + 1) % numSteps;
 		$("[col="+step+"]").addClass('highlight')
 		$("[col="+prevstep+"]").removeClass('highlight')
 		//console.log(step)
 
 	}, "16n");
 loop.humanize=false;
+
+updateSliders();
+//startaudiocontext - needed for iOS devices to manually start the audio engine. 
+
+StartAudioContext(Tone.context, "#play");

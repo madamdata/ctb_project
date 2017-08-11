@@ -1,6 +1,6 @@
 /*******************Header**********************/
 *{
-  font-family: helvetica;
+  font-family: Trebuchet MS, Helvetica;
 }
 header{
   margin: 0 auto;
@@ -26,7 +26,8 @@ nav{
 nav a{
   padding-left: 0.75em;
   padding-right: 0.75em;
-  font-size: 1.5em;
+  font-size: 1.4em;
+  font-weight: 100;
   color: black;
   text-decoration: none;
   position: relative;
@@ -59,14 +60,19 @@ nav a{
 }
 
 nav a:first-child {
-  box-shadow: 0px 0px 4px 4px white;
+  /*box-shadow: 0px 0px 4px 4px white;*/
   /*background-color: white;*/
+	border-radius: 3px;
+	border: 1px solid;
+	/*font-weight:200;*/
   color: white;
  
   left: -1.25em;
   }
 nav a:last-child{
-  box-shadow: 0px 0px 4px 4px white;
+	border-radius: 3px;
+	border: 1px solid;
+  /*box-shadow: 0px 0px 4px 4px white;*/
 /*  background-color: white;*/
 color: white;
 
@@ -99,26 +105,25 @@ table{
 
 }
 .step_opt{
-  margin-top: 0.5em;
-  margin-left: -20px;
+  margin-top: 0em;
+  margin-left: -5px;
   text-align: left;
   float: left;
   display: inline-block;
   max-width: 20%;
   width: auto;
   line-height: 2.5;
+  /*border: 2px solid;*/
 }
 
-}
 .sqopt{
   margin: 0 auto;
   border:none;
   float: left;
   width: auto;
-  max-width: 25%;
-   font-size: 0.8em;
-  height:35px;
-  border:none;
+  max-width: 100%;
+  font-size: 0.8em;
+  height:100px;
 
 }
 
@@ -129,16 +134,18 @@ ul{
   word-spacing: 0.75;
 }
 
+/*steps */
 td {
-    border: 1px solid;
-    border-color: #dddddd;
+    border: 2px solid;
+    border-color: #eeeeee;
+    border-radius:8px;
     width: 35px;
     height: 35px;
 
 }
 .clicked{
   background-color: #5000A2;
-  box-shadow: inset 0 0 2px #FFFF00;
+  /*box-shadow: inset 0 0 2px #FFFF00;*/
 }
 
 .highlight{
@@ -146,15 +153,60 @@ td {
 	/*border: none;*/
 }
 
+/*selector menus*/
 select{
-	/*-webkit-border-radius: 20px;*/
-	-border-radius:0px;
+	background: url(http://i62.tinypic.com/15xvbd5.png);
+	background-size: 18%;
+	background-position: 94% 55%;
+	background-repeat: no-repeat;
+	overflow:hidden;
+	-webkit-appearance:none;
+	-moz-border-radius:20px;
+	border: 2px solid;
 	background-color: #bb44df;
-	color: #FFFFFF;
+	/*background-color: #000000;*/
+	text-align: center;
+	color: #000000;
+	height: 30px;
+	width: 100px;
+	max-width: 100px;
+	padding: 5px;
 }
 
-input{
-	background-color:#bb99ef;
+.rounded{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.step_opt li {
+	padding: -15px;
+	border-radius: 20px;
+	/*border: 1px solid;*/
+	height: 40px;
+}
+
+/*input{*/
+	/*background-color:#bb99ef;*/
+/*}*/
+
+input[type="text"] {
+	border: 2px solid;
+	border-radius:5px;
+
+
+}
+
+.transportbutton{
+	border: 2px solid;
+	border-radius:10px;
+	background: #ee99bc
+}
+
+.resizebutton{
+	border: 2px solid;
+	border-radius:7px;
+	background: #eeaaee
 }
 
 section{
@@ -208,20 +260,6 @@ $teal: #1abc9c !default;
     padding: 60px;
   }*/
 }
-
-// Range Slider
-$range-width: 100% !default;
-
-$range-handle-color: $shade-10 !default;
-$range-handle-color-hover: $teal !default;
-$range-handle-size: 20px !default;
-
-$range-track-color: $shade-1 !default;
-$range-track-height: 10px !default;
-
-$range-label-color: $shade-10 !default;
-$range-label-width: 30px !default;
-
 .range-slider {
   width: $range-width;
 }
@@ -230,78 +268,34 @@ $range-label-width: 30px !default;
   -webkit-appearance: none;
   /*width: calc(100% - (#{$range-label-width + 13px}));*/
   width: 150px;
-  height: $range-track-height;
+  height: 15px;
   border-radius: 10px;
-  background: $range-track-color;
-  outline: none;
+  background: #bb99ef;
   padding: 0;
   margin: 0;
-
-  // Range Handle
-  &::-webkit-slider-thumb {
-    appearance: none;
-    width: $range-handle-size;
-    height: $range-handle-size;
-    border-radius: 50%;
-    background: $range-handle-color;
-    cursor: pointer;
-    transition: background .15s ease-in-out;
-
-    &:hover {
-      background: $range-handle-color-hover;
-    }
-  }
-
-  &:active::-webkit-slider-thumb {
-    background: $range-handle-color-hover;
-  }
-
-  &::-moz-range-thumb {
-    width: $range-handle-size;
-    height: $range-handle-size;
-    border: 0;
-    border-radius: 50%;
-    background: $range-handle-color;
-    cursor: pointer;
-    transition: background .15s ease-in-out;
-
-    &:hover {
-      background: $range-handle-color-hover;
-    }
-  }
-
-  &:active::-moz-range-thumb {
-    background: $range-handle-color-hover;
-  }
-}
+ }
 
 
-// Range Label
+
 .range-slider__value {
   display: inline-block;
   position: relative;
-  width: $range-label-width;
-  color: $shade-0;
+  /*width: $range-label-width;*/
+  max-width:20px;
+  min-width:20px;
+  color: #555555;
   line-height: 20px;
-  text-align: center;
+  text-align: left;
   border-radius: 3px;
   background: $range-label-color;
-  padding: 5px 10px;
-  margin-left: 8px;
-
-  &:after {
-    position: absolute;
-    top: 8px;
-    left: -7px;
-    width: 0;
-    height: 0;
-    border-top: 7px solid transparent;
-    border-right: 7px solid $range-label-color;
-    border-bottom: 7px solid transparent;
-    content: '';
-  }
+  padding: 5px 5px;
+  margin-left: 0px;
 }
 
+.sliderlabel {
+	font-size: 0.7em;
+	margin-right:10px;
+}
 
 // Firefox Overrides
 ::-moz-range-track {
