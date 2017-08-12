@@ -15,6 +15,9 @@ $(document).ready(function(){
 	var stopButton = $("[id='stop']");
 	var randomizeButton = $("[id='randomize']");
 	var resetButton = $("[id='reset']");
+	var submitcompbutton = $("[id$='submitbutton']");
+	var browsecompbutton = $("[id$='browsebutton']");
+	var loadcompbutton = $("[id$='loadcompbutton']");
 
 	//link controls to functions
 	playButton.click(function(){startSequence();});
@@ -30,6 +33,9 @@ $(document).ready(function(){
 	numStepsSlider.change(function() { changeNumSteps(this.value)});
 	randomizeButton.click(function(){randomizeAll();});
 	resetButton.click(function(){clearAll()});
+	submitcompbutton.click(function(){submitComp()});
+	browsecompbutton.click(function(){browseComps()});
+	loadcompbutton.click(function(){loadComp()});
 
 	// function to generate a grid of buttons with row and column attributes
 	function generateGrid( rows, cols ) {

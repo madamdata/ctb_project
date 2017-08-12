@@ -25,10 +25,10 @@
 				<a href="stories.html">  stories  </a>
 			</nav>
 		</header>
-		 <div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Compose your own Chinatown Beat by using this Audio Sequencer. Create a piece before September 15, 2017 for the Chinatown Beat competition! If selected, you can win an audio field recorder starter kit.
-</div> 
+		<div class="alert">
+			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+			Compose your own Chinatown Beat by using this Audio Sequencer. Create a piece before September 15, 2017 for the Chinatown Beat competition! If selected, you can win an audio field recorder starter kit.
+		</div> 
 		<section>
 			<h2></h2>
 	  		<input type="text" maxlength="2" name="value" id='value' value='16'/>
@@ -37,6 +37,29 @@
 			<button id="play" class="transportbutton">play</button>
 			<button id="stop" class="transportbutton">stop</button>
 			<button id="reset" class="transportbutton">reset</button>
+
+			<!--modal window-->
+			<a href="#openSubmit" class="transportbutton saveload">save/load</a>
+			<div id="openSubmit" class="modalDialog">
+				<div>	<a href="#close" title="Close" class="close">X</a>
+
+					<h2>Submit your composition!</h2>
+					<p>Public username: <input type="text" id="useridinput"></input></p>
+					<p>Email Address: <input type="text" id="emailinput"></input></p>
+					<button id="submitbutton">submit</button>
+				</div>
+			</div>
+			<a href="#openBrowse" id="browsebutton" class="transportbutton saveload">browse</a>
+			<div id="openBrowse" class="modalDialog">
+				<div> <a href="#close" title="Close" class="close">X</a>
+					<h2>Check out others' compositions!</h2>
+					<select id="listofcomps" size=15></select>
+					<button id="loadcompbutton" class="transportbutton" onclick="location.href='#close';">load</button>
+					<div id="complist"> </div>
+				</div>
+
+			</div>
+
 			<p class="sliderlabel">loop length
 				<input class="range-slider__range" type="range" value="16" min="1" max="16" id="numSteps">
 				  <span class="range-slider__value">0</span>
@@ -156,6 +179,7 @@
 
 		<script src="scripts/startaudiocontext.js"></script>
 		<script src="scripts/ctb.js"></script>
+		<script src="scripts/saveload.js"></script>
 		<script src="scripts/Tone.js"></script>
 		<script src="scripts/sound.js"></script>
 		

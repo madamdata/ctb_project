@@ -9,6 +9,7 @@ var synths = [0,0,0,0,0,0,0,0];
 var step = 0;
 var bpm = 180;
 var loop;
+var allsaves;
 //var samplebank = [
 	//"./samples/ctbseqchords.wav",
 	//"./samples/min_kick_13_E.wav",
@@ -182,7 +183,6 @@ function selectSample(which) {
 }
 
 function changeTrackSample(track, sample) {
-	console.log(track, sample);
 	//console.log(synths[track].player);
 	synths[track].player.load(samplebank[sample]);
 }
@@ -244,6 +244,91 @@ function changeLength(value) {
 
 function changeVolume(value) {
 	params[currentSample].Volume = value;
+}
+
+//SAVING AND LOADING
+
+function sendData(stuffToSend) {
+	var jsonstring = JSON.stringify(stuffToSend);
+	var request = $.ajax({
+		url: "saves/save.php",
+		type: "post",
+		data: {data:jsonstring},
+	});
+}
+
+function getData(url, func) {
+	var request = $.ajax({
+		url:url,
+		type: "get",
+	});
+	request.done(func);
+}
+
+function validateEmail(email) {
+
+}
+
+function validateUserName(username) {
+	var re = /^[a-z0-9]+$/i;
+	return re.test(username);
+}
+	
+function submitComp() {
+	//console.log(params);
+	var userid = $("[id$='useridinput']").val();
+	var emailaddress = $("[id$='emailinput']").val();
+	var newdata = {user:userid, email:emailaddress, params:params, sequences:sequences};
+	var olddata;
+	if (validateUserName(userid)) {
+	var getOld = $.ajax({
+		url: "saves/foo.txt",
+		type: "get",
+	});
+	//if save file doesn't exist, initialize an empty array
+	getOld.fail(function(response) {
+		olddata = [];
+		olddata.push(newdata);
+		sendData(olddata);
+	});
+
+	// if save file exists, read contents into an array and append the new data
+	getOld.done(function(response) {
+		olddata = JSON.parse(response); 
+		//push the new data onto the end of old data
+		olddata.push(newdata);
+		sendData(olddata);
+	});
+	} else {console.log("ERROR BAD USERNAME")};
+} 
+
+//display list of all saved compositions
+function browseComps() {
+	var listbox = $("[id$='listofcomps']");
+	var usernames = [];
+	listbox.empty();
+	getData("saves/foo.txt", function(response) { 
+		var saved = JSON.parse(response);
+		for (i=0;i<(saved.length);i++) {
+			usernames.push(saved[i].user);
+		};
+		console.log(usernames);
+		for (i=0;i<(usernames.length);i++) {
+			var optionstring = "<option value="+i+">"+usernames[i]+"</option>";
+			listbox.append(optionstring);
+		};
+		allsaves = saved;
+	});
+}
+
+function loadComp() {
+	var listbox = $("[id$='listofcomps']");
+	var selectedcomp = allsaves[listbox.val()];
+	params = selectedcomp.params;
+	sequences = selectedcomp.sequences;
+	updateGUI();
+	updateSliders();
+
 }
 
 //make blank sequences
