@@ -328,7 +328,7 @@ display: inline-block;
 text-align: justify;
 overflow: hidden;
 margin-top: 20px;
-height: 60%;
+height: 50%;
 /*border: 1px solid lightgray;
 */padding: 15px;
 }
@@ -342,7 +342,6 @@ height: 60%;
   margin-left: 20px;
   vertical-align: text-top;
 }
-
 .aboutimg{
   width: 75%;
   margin: 0 auto;
@@ -367,6 +366,7 @@ height: 60%;
   display: inline-block;
   text-align: left;
   line-height: 2.5;
+  vertical-align: text-top;
 }
 
 .stories p::first-letter {
@@ -385,6 +385,9 @@ border-left: 1px solid black;
 border-bottom: 1px solid black
 }
 
+iframe{
+  height: 200px;
+}
 
  /* The alert message box */
 .alert {
